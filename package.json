@@ -1,0 +1,19 @@
+{
+  "name": "robot-game",
+  "version": "1.0.0",
+  "description": "Robot Game Assessment for Cats and Shepard",
+  "main": "js/game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylandupreez/RobotGame.git"
+  },
+  "author": "Dylan du Preez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylandupreez/RobotGame/issues"
+  },
+  "homepage": "https://github.com/dylandupreez/RobotGame#readme"
+}
