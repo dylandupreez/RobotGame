@@ -5,6 +5,7 @@ window.onload = function () {
     var robotX = 0;
     var robotY = 0;
     var robotAngle = 0;
+    var robotPlaced = false;
     var maxX = board.offsetLeft + board.offsetWidth;
     var maxY = board.offsetTop + board.offsetHeight;
     var minX = board.offsetLeft;
@@ -17,11 +18,33 @@ window.onload = function () {
     var left = document.getElementById("left");
     var right = document.getElementById("right");
 
+    var keys = {
+        UP: 38,
+        RIGHT: 39,
+        LEFT: 37
+    }
+
     placeButton.onclick = function (e) {
         e.preventDefault();
         if (xCoOrd.value && yCoOrd.value) {
             placeRobot(parseInt(xCoOrd.value), parseInt(yCoOrd.value), parseInt(facing.value));
         }
+    }
+
+    document.onkeyup = function (e) {
+        switch (e.which) {
+            case keys.UP:
+                moveRobotForward();
+                break;
+            case keys.LEFT:
+                rotateLeft();
+                break;
+            case keys.RIGHT:
+                rotateRight();
+                break;
+        }
+        console.log("angle", robotAngle, "x", robotX, "y", robotY);
+
     }
 
     forward.onclick = function (e) {
@@ -31,26 +54,33 @@ window.onload = function () {
 
     left.onclick = function (e) {
         e.preventDefault();
-        var angle = robotAngle;
-        if (angle === 0) {
-            angle = 270;
-        }
-        else {
-            angle -= 90;
-        }
-        rotateRobot(angle);
+        rotateLeft();
     }
 
     right.onclick = function (e) {
         e.preventDefault();
-        var angle = robotAngle;
-        if (angle === 360) {
-            angle = 0;
+        rotateRight();
+    }
+
+    function rotateLeft() {
+        if (robotPlaced) {
+            var angle = robotAngle;
+            angle -= 90;
+            rotateRobot(angle);
         }
-        
-        angle += 90;
-        
-        rotateRobot(angle);
+    }
+
+    function rotateRight() {
+        if (robotPlaced) {
+            var angle = robotAngle;
+            angle += 90;
+            if (angle > 360) {
+                angle = 360 - angle;
+            }else if(angle < -360){
+                angle = 360 + angle;
+            }
+            rotateRobot(angle);
+        }
     }
 
 
@@ -61,20 +91,24 @@ window.onload = function () {
 
     function moveRobotForward() {
         robotX = robot.offsetLeft;
-        robotY= robot.offsetTop;
+        robotY = robot.offsetTop;
         if (isSafeMove()) {
             switch (robotAngle) {
                 case 0:
                 case 360:
+                case -360:
                     robotY -= 100;
                     break;
                 case 90:
+                case -270:
                     robotX += 100;
                     break;
                 case 180:
+                case -180:
                     robotY += 100;
                     break;
                 case 270:
+                case -90:
                     robotX -= 100;
                     break;
             }
@@ -83,21 +117,28 @@ window.onload = function () {
         else {
             alert("If I move in this direction I will fall off the table!!");
         }
-
+        console.log("angle", robotAngle, "x", robotX, "y", robotY);
     }
 
     function isSafeMove() {
         var robotOffsetTop = robot.offsetTop;
         var robotOffsetLeft = robot.offsetLeft;
-        switch (robotAngle) {
-            case 0:
-                return (robotOffsetTop - 100) > minY;
-            case 90:
-                return (robotOffsetLeft + 100) < maxX;
-            case 180:
-                return (robotOffsetTop + 100) < maxY;
-            case 270:
-                return (robotOffsetLeft - 100) > minX;
+        if (robotPlaced) {
+            switch (robotAngle) {
+                case 0:
+                case 360:
+                case -360:
+                    return (robotOffsetTop - 100) > minY;
+                case 90:
+                case -270:
+                    return (robotOffsetLeft + 100) < maxX;
+                case 180:
+                case -180:
+                    return (robotOffsetTop + 100) < maxY;
+                case 270:
+                case -90:
+                    return (robotOffsetLeft - 100) > minX;
+            }
         }
         return false;
     }
@@ -109,16 +150,18 @@ window.onload = function () {
     }
 
     function placeRobot(x, y, angle) {
-        robotX = x;
-        robotY = y;
         robotAngle = angle;
         var squares = document.querySelectorAll(".square");
         var index = convertCoOrdsToIndex(x, y);
         var activeSquare = squares[index];
-        robot.style.display = "block";
-        robot.style.top = (activeSquare.offsetTop + (activeSquare.clientHeight / 2) - (robot.clientHeight / 2)) + "px";
-        robot.style.left = (activeSquare.offsetLeft + (activeSquare.clientWidth / 2) - (robot.clientWidth / 2)) + "px";
+        
+        robotY = (activeSquare.offsetTop + (activeSquare.clientHeight / 2)) - (robot.clientHeight / 2);
+        robotX = (activeSquare.offsetLeft + (activeSquare.clientWidth / 2)) - (robot.clientWidth / 2);
+        robot.style.top = robotY + "px";
+        robot.style.left = + robotX + "px";
         robot.style.transform = "rotate(" + angle + "deg)";
+        robot.style.visibility = "visible";
+        robotPlaced = true;
     }
 
 

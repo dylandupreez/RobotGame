@@ -3,6 +3,22 @@ body{
     font-size: 15px;
     color:#353535;
 }
+
+button{
+    display: block;
+    width:50px;
+    height:50px;
+    background: -moz-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    border:solid 1px rgb(181,189,200);
+    border-radius: 5px;
+    position: relative;
+    
+}
+
+
+
 .gameHolder{
     height:700px;
     width:100%;
@@ -42,28 +58,74 @@ body{
 }
 
 .robot{
-    background: #ff0000;
+    background: #6E6E6E;
     width:50px;
-    height:50px;
+    height:30px;
     position: absolute;
     top:0;
     left:0;
-    display: none;
     transition: all 0.5s ease;  
     transform: translate3d(0,0,0);
+    border:solid 1px #000;
+    border-top: solid 4px #0000ff;
+    visibility: hidden;
 }
 
-.robot:after{
+.robot .head{
+    width:40px;
+    height:20px;
+    position: absolute;
+    top:4px;
+    left:4px;
+    border: 1px solid #000;
+}
+
+.robot .head:before{
     content: " ";
     display: block;
-    width:0;
-    height:0;
-    border: 20px solid transparent;
-    border-bottom-color: #0000ff;
+    width:20px;
+    height:4px; 
+    background: #ffff00;
     position: absolute;
-    left:5px;
-    top:-5px;
+    left:10px;
+    top:-3px;
 }
+
+.robot .head:after{
+    content: " ";
+    display: block;
+    width:4px;
+    height:4px; 
+    border-radius: 2px;
+    background: #ff0000;
+    position: absolute;
+    left:18px;
+    top:8px;
+}
+
+.robot .leftArm{
+    width:10px;
+    height:10px;
+    position: absolute;
+    left:-10px;
+    top:10px;
+    background: #6E6E6E;
+    border:1px solid #000;
+} 
+
+.robot .rightArm{
+    width:10px;
+    height:10px;
+    position: absolute;
+    right:-10px;
+    top:10px;
+    background: #6E6E6E;
+    border:1px solid #000;
+} 
+
+
+
+
 
 .controls{
     width: 600px;
@@ -78,13 +140,30 @@ body{
     margin:auto;
 }
 
+.controls .forward button:before{
+    content: " ";
+    border:10px solid transparent;
+    border-bottom-color: #000;
+    position: absolute;
+    top:10px;
+    left:14px;
+}
+
 .controls .left button{
     float: left;
+    line-height: 50px;
+    text-align: center;
+    font-size: 30px;
 }
+
 
 .controls .right button{
     float: right;
+    line-height: 50px;
+    text-align: center;
+    font-size: 30px;
 }
+
 
 .rotateButtons{
     display: -webkit-box;
