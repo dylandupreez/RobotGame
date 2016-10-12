@@ -2,68 +2,83 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Robot Game | Cats and Shepard</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/index.css" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Robot Game | Cats and Shepard</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/index.css" />
 </head>
 
 <body>
-    <div class="gameHolder">
-        <div class="gameArea">
-            <div id="board" class="board">
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-                <div class="square"></div>
-            </div>
-            <div id="robot" class="robot"></div>
-        </div>
-    </div>
-    <div class="controls">
-        <div class="up">
-            <button id="forward">Forward</button>
-        </div>
-        <div class="rotateButtons">
-            <div class="left">
-                <button id="left">Rotate Left</button>
-            </div>
-            <div class="right">
-                <button id="right">Rotate Right</button>
-            </div>
-        </div>
-        <div class="place">
-            <label for="xCoOrd">X</label>
-            <input type="number" id="xCoOrd"/>
-            <label for="yCoOrd">Y</label>
-            <input type="number" id="yCoOrd"/>
-            <button id="place">Place Robot</button>
-        </div>
-    </div>
-    <script src="js/game.js"></script>
+	<div class="gameHolder">
+		<div class="gameArea">
+			<div id="board" class="board">
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+			</div>
+			<div id="robot" class="robot"></div>
+		</div>
+	</div>
+	<div class="controls">
+		<div class="forward">
+			<button id="forward">Forward</button>
+		</div>
+		<div class="rotateButtons">
+			<div class="left">
+				<button id="left">Rotate Left</button>
+			</div>
+			<div class="right">
+				<button id="right">Rotate Right</button>
+			</div>
+		</div>
+		<div class="place">
+			<div class="coOrds">
+				<div class="x">
+					<label for="xCoOrd">X</label>
+					<input type="number" id="xCoOrd" value="0" />
+				</div>
+                <div class="direction">
+                    <label for="facing">Facing</label>
+                    <select id="facing">
+                        <option value="0">North</option>
+                        <option value="90">East</option>
+                        <option value="180">South</option>
+                        <option value="270">West</option>
+                    </select>
+                </div>
+				<div class="y">
+					<label for="yCoOrd">Y</label>
+					<input type="number" id="yCoOrd" value="0" />
+				</div>
+			</div>
+			<button id="place">Place Robot</button>
+		</div>
+	</div>
+	<script src="js/game.js"></script>
 </body>
 
 </html>
